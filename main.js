@@ -1,7 +1,7 @@
 'use strict';
 
 const get = require('./lib/get');
-const dynamos = reuqire('./lib/dynamos');
+const dynamos = require('./lib/dynamos');
 
 let dynamoInUse = 'master';
 
