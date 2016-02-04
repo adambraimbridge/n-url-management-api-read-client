@@ -1,7 +1,7 @@
 'use strict';
 
-const rewire = require('rewire');
-const main = rewire('../main');
+const proxyquire = require('proxyquire');
+const main = require('..');
 const expect = require('chai').expect;
 
 describe('#get', () => {
@@ -18,7 +18,7 @@ describe('#get', () => {
 			getItem: (opts, cb) => setTimeout(() => cb(null, response))
 		};
 
-		main.__set__('dynamos', {
+		proxyquire('../lib/dynamos', {
 			master: { table: 'urlmgmtapi_master', instance: mockInstance },
 			slave: { table: 'urlmgmtapi_slave', instance: mockInstance }
 		});
