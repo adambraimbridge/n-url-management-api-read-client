@@ -11,8 +11,8 @@ const mockItem = {
 	}
 };
 
-const main = proxyquire('..', {
-	'./lib/dynamos': {
+const active = proxyquire('../lib/active', {
+	'./dynamos': {
 		master: {
 			table: 'urlmgmtapi_master',
 			instance: {
@@ -35,15 +35,14 @@ const main = proxyquire('..', {
 describe('#active', () => {
 
 	it('should start off being ‘master’', () => {
-		expect(main.active()).to.eql('master');
+		expect(active()).to.eql('master');
 	});
 
 	it('should prefer the faster region after the healthcheck has run', done => {
 		setTimeout(() => {
-			expect(main.active()).to.eql('slave');
+			expect(active()).to.eql('slave');
 			done();
 		}, 500);
 	});
 
 });
-
