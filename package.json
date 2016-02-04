@@ -4,5 +4,8 @@
   "dependencies": {
     "aws-sdk": "^2.2.33",
     "denodeify": "^1.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^1.10.3"
   }
 }
