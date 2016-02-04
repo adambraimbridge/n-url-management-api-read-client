@@ -1,5 +1,5 @@
 {
-  "name": "@financial-times/next-url-management-api-read-client",
+  "name": "@financial-times/n-url-management-api-read-client",
   "version": "0.0.0",
   "dependencies": {
     "aws-sdk": "^2.2.33",
