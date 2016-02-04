@@ -8,4 +8,3 @@ exports.get = fromURL => {
 	const dynamo = dynamos[active()];
 	return get(dynamo.instance, dynamo.table, fromURL);
 };
-
