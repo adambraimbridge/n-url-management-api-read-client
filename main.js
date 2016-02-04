@@ -15,7 +15,6 @@ exports.active = () => {
 	return dynamoInUse;
 };
 
-
 function raceDynamos() {
 	return Promise.race([
 		get(dynamos.master.instance, dynamos.master.table, 'www.ft.com/fastft').then(() => 'master', () => {}),
