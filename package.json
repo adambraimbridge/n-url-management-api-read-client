@@ -1,6 +1,7 @@
 {
   "name": "@financial-times/n-url-management-api-read-client",
   "version": "0.0.0",
+  "main": "main",
   "dependencies": {
     "aws-sdk": "^2.2.33",
     "denodeify": "^1.2.1"
@@ -9,6 +10,6 @@
     "chai": "^3.5.0",
     "eslint": "^1.10.3",
     "mocha": "^2.4.5",
-    "rewire": "^2.5.1"
+    "proxyquire": "^1.7.4"
   }
 }
