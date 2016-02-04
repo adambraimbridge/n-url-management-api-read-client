@@ -3,14 +3,6 @@
 const proxyquire = require('proxyquire');
 const expect = require('chai').expect;
 
-const mockItem = {
-	Item: {
-		FromURL: { S: 'www.ft.com/fastft' },
-		Code: { N: '100' },
-		ToURL: { S: 'www.ft.com/stream/brandId/NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz' }
-	}
-};
-
 const active = proxyquire('../lib/active', {
 	'./dynamos': {
 		master: {
@@ -33,6 +25,8 @@ const active = proxyquire('../lib/active', {
 });
 
 describe('#active in a total failure mode', () => {
+
+	before(() => active.reset())
 
 	it('should start off being ‘master’', () => {
 		expect(active()).to.eql('master');
