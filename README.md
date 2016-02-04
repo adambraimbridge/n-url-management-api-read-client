@@ -21,3 +21,9 @@ You will need the following IAM permissions:-
   ]
 }
 ```
+
+## Environment variables
+
+Expects:-
+- `URLMGMTAPI_AWS_ACCESS_KEY`
+- `URLMGMTAPI_AWS_SECRET_KEY`
