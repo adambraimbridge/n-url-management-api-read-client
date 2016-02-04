@@ -1,7 +1,6 @@
 'use strict';
 
 const proxyquire = require('proxyquire');
-const main = require('..');
 const expect = require('chai').expect;
 
 describe('#get', () => {
@@ -15,7 +14,9 @@ describe('#get', () => {
 			}
 		};
 		const mockInstance = {
-			getItem: (opts, cb) => setTimeout(() => cb(null, response))
+			getItem: (opts, cb) => {
+				setTimeout(() => cb(null, response))
+			}
 		};
 
 		proxyquire('../lib/dynamos', {
@@ -25,7 +26,7 @@ describe('#get', () => {
 	});
 
 	it('should #get /fastft', () => {
-		return main.get('www.ft.com/fastft')
+		return require('..').get('www.ft.com/fastft')
 			.then(data => {
 				expect(data).to.eql({
 					code: 100,
