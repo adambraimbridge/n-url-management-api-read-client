@@ -17,7 +17,7 @@ const active = proxyquire('../lib/active', {
 			table: 'urlmgmtapi_master',
 			instance: {
 				getItem: (opts, cb) => {
-					setTimeout(() => cb(null, mockItem), 300)
+					setTimeout(() => cb(new Error("master failure")), 100)
 				}
 			}
 		},
@@ -25,14 +25,14 @@ const active = proxyquire('../lib/active', {
 			table: 'urlmgmtapi_slave',
 			instance: {
 				getItem: (opts, cb) => {
-					setTimeout(() => cb(null, mockItem), 100)
+					setTimeout(() => cb(null, mockItem), 300)
 				}
 			}
 		}
 	}
 });
 
-describe('#active', () => {
+describe('#active in a single region failure mode', () => {
 
 	before(() => active.reset())
 
@@ -40,7 +40,7 @@ describe('#active', () => {
 		expect(active()).to.eql('master');
 	});
 
-	it('should prefer the faster region after the healthcheck has run', done => {
+	it('should use the healthy region', done => {
 		setTimeout(() => {
 			expect(active()).to.eql('slave');
 			done();
