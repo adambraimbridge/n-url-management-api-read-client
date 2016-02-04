@@ -15,11 +15,7 @@ describe('#get', () => {
 			}
 		};
 		const mockInstance = {
-			getItem: (opts, cb) => {
-				setTimeout(() => {
-					cb(null, response);
-				});
-			}
+			getItem: (opts, cb) => setTimeout(() => cb(null, response))
 		};
 
 		main.__set__('dynamos', {
