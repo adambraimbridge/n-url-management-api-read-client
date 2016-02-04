@@ -1,7 +1,9 @@
 'use strict';
 
 const get = require('./lib/get');
-const dynamos = require('./lib/dynamos');
+
+// HACK: `let` rather than `const` so it can be rewired in tests 😞
+let dynamos = require('./lib/dynamos');
 
 let dynamoInUse = 'master';
 
