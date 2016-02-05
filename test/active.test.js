@@ -2,14 +2,7 @@
 
 const proxyquire = require('proxyquire');
 const expect = require('chai').expect;
-
-const mockItem = {
-	Item: {
-		FromURL: { S: 'www.ft.com/fastft' },
-		Code: { N: '100' },
-		ToURL: { S: 'www.ft.com/stream/brandId/NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz' }
-	}
-};
+const mockItem = require('./fixtures/fastft.json');
 
 const active = proxyquire('../lib/active', {
 	'./dynamos': {
