@@ -17,7 +17,7 @@ exports.health = opts => {
 				ok: !active.totalFailure,
 				checkOutput: `Total failure mode (can't reach either master or slave DynamoDBs) ${active.totalFailure}`,
 				lastUpdated: new Date(),
-				panicGuide: `Try checking the URLMGMTAPI_AWS_ACCESS/SECRET_KEYs and the status of DynamoDB in both eu-west-1 and us-east-1`,
+				panicGuide: `Try checking the `URLMGMTAPI_AWS_ACCESS/SECRET_KEY`s and the status of DynamoDB in both eu-west-1 and us-east-1`,
 				severity: opts.severity,
 				businessImpact: `Lots of URLs will not work, the site will be very broken.`,
 				technicalSummary: `This app can't talk to either DynamoDB tables.`
