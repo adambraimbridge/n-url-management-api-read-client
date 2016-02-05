@@ -2,16 +2,11 @@
 
 const proxyquire = require('proxyquire');
 const expect = require('chai').expect;
+const mockItem = require('./fixtures/fastft.json');
 
 const mockInstance = {
 	getItem: (opts, cb) => {
-		setTimeout(() => cb(null, {
-			Item: {
-				FromURL: { S: 'www.ft.com/fastft' },
-				Code: { N: '100' },
-				ToURL: { S: 'www.ft.com/stream/brandId/NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz' }
-			}
-		}))
+		setTimeout(() => cb(null, mockItem))
 	}
 };
 
