@@ -15,8 +15,7 @@ exports.get = fromURL => {
 		dynamo: dynamo.instance,
 		table: dynamo.table,
 		fromURL: fromURL,
-		metrics: metrics,
-		cache: true
+		metrics: metrics
 	});
 };
 
