@@ -5,8 +5,7 @@
   "dependencies": {
     "aws-sdk": "^2.2.33",
     "denodeify": "^1.2.1",
-    "ft-next-logger": "^4.2.3",
-    "next-metrics": "^1.19.1"
+    "ft-next-logger": "^4.2.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",

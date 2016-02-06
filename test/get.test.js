@@ -2,11 +2,12 @@
 
 const proxyquire = require('proxyquire');
 const expect = require('chai').expect;
-const mockItem = require('./fixtures/fastft.json');
+const itemFixture = require('./fixtures/fastft.json');
+const metricsMock = require('./utils/metrics-mock');
 
 const mockInstance = {
 	getItem: (opts, cb) => {
-		setTimeout(() => cb(null, mockItem))
+		setTimeout(() => cb(null, itemFixture))
 	}
 };
 
@@ -17,7 +18,10 @@ const main = proxyquire('..', {
 	}
 });
 
+
 describe('#get', () => {
+
+	before(() => main.init({ metrics: metricsMock }));
 
 	it('should #get /fastft', () => {
 		return main.get('www.ft.com/fastft')
