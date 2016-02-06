@@ -37,7 +37,7 @@ describe('#active', () => {
 	it('should prefer the faster region after the healthcheck has run', done => {
 		setTimeout(() => {
 			expect(active()).to.eql('slave');
-			expect(active.totalFailure).to.be.false;
+			expect(active.totalFailure()).to.be.false;
 			done();
 		}, 500);
 	});

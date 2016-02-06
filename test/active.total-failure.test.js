@@ -36,7 +36,7 @@ describe('#active in a total failure mode', () => {
 	it('should just use master and hope for the best', done => {
 		setTimeout(() => {
 			expect(active()).to.eql('master');
-			expect(active.totalFailure).to.be.true;
+			expect(active.totalFailure()).to.be.true;
 			done();
 		}, 500);
 	});

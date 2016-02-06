@@ -37,7 +37,7 @@ describe('#active in a single region failure mode', () => {
 	it('should use the healthy region', done => {
 		setTimeout(() => {
 			expect(active()).to.eql('slave');
-			expect(active.totalFailure).to.be.false;
+			expect(active.totalFailure()).to.be.false;
 			done();
 		}, 500);
 	});
