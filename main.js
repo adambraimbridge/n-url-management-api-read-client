@@ -11,7 +11,13 @@ exports.health = health.check;
 
 exports.get = fromURL => {
 	const dynamo = dynamos[active()];
-	return get(dynamo.instance, dynamo.table, fromURL, metrics);
+	return get({
+		dynamo: dynamo.instance,
+		table: dynamo.table,
+		fromURL: fromURL,
+		metrics: metrics,
+		cache: true
+	});
 };
 
 exports.init = opts => {
