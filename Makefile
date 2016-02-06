@@ -1,5 +1,8 @@
 .PHONY: test coverage
 
+clean:
+	git clean -fxd
+
 install: node_modules
 
 node_modules:
