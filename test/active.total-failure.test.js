@@ -2,6 +2,7 @@
 
 const proxyquire = require('proxyquire');
 const expect = require('chai').expect;
+const metricsMock = require('./utils/metrics-mock');
 
 const active = proxyquire('../lib/active', {
 	'./dynamos': {
@@ -26,7 +27,7 @@ const active = proxyquire('../lib/active', {
 
 describe('#active in a total failure mode', () => {
 
-	before(() => active.reset())
+	before(() => active.init({ metrics: metricsMock }));
 
 	it('should start off being ‘master’', () => {
 		expect(active()).to.eql('master');

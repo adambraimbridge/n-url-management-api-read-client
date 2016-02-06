@@ -2,7 +2,8 @@
 
 const proxyquire = require('proxyquire');
 const expect = require('chai').expect;
-const mockItem = require('./fixtures/fastft.json');
+const itemFixture = require('./fixtures/fastft.json');
+const metricsMock = require('./utils/metrics-mock');
 
 const active = proxyquire('../lib/active', {
 	'./dynamos': {
@@ -10,7 +11,7 @@ const active = proxyquire('../lib/active', {
 			table: 'urlmgmtapi_master',
 			instance: {
 				getItem: (opts, cb) => {
-					setTimeout(() => cb(null, mockItem), 300)
+					setTimeout(() => cb(null, itemFixture), 300)
 				}
 			}
 		},
@@ -18,7 +19,7 @@ const active = proxyquire('../lib/active', {
 			table: 'urlmgmtapi_slave',
 			instance: {
 				getItem: (opts, cb) => {
-					setTimeout(() => cb(null, mockItem), 100)
+					setTimeout(() => cb(null, itemFixture), 100)
 				}
 			}
 		}
@@ -27,7 +28,7 @@ const active = proxyquire('../lib/active', {
 
 describe('#active', () => {
 
-	before(() => active.reset())
+	before(() => active.init({ metrics: metricsMock }));
 
 	it('should start off being ‘master’', () => {
 		expect(active()).to.eql('master');
