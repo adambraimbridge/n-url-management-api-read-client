@@ -10,7 +10,7 @@ const active = proxyquire('../lib/active', {
 			table: 'urlmgmtapi_master',
 			instance: {
 				getItem: (opts, cb) => {
-					setTimeout(() => cb(new Error("master failure")), 300)
+					setTimeout(() => cb(new Error("master failure")), 150)
 				}
 			}
 		},
@@ -24,6 +24,7 @@ const active = proxyquire('../lib/active', {
 		}
 	}
 });
+const health = proxyquire('../lib/health', { active });
 
 describe('#active in a total failure mode', () => {
 
@@ -38,7 +39,16 @@ describe('#active in a total failure mode', () => {
 			expect(active()).to.eql('master');
 			expect(active.totalFailure()).to.be.true;
 			done();
-		}, 500);
+		}, 200);
+	});
+
+	it('should fail the healthcheck', done => {
+		setTimeout(() => {
+			const check = health.check({ severity: 2 }).getStatus();
+			expect(check.ok).to.be.false;
+			expect(check.severity).to.eql(2);
+			done();
+		}, 200);
 	});
 
 });
