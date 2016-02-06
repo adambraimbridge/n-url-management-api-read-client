@@ -1,8 +1,13 @@
-.PHONY: test
+.PHONY: test coverage
 
-install:
+install: node_modules
+
+node_modules:
 	npm install
 
 test:
 	eslint .
-	mocha
+	istanbul cover ./node_modules/.bin/_mocha
+
+coverage:
+	open coverage/lcov-report/index.html
