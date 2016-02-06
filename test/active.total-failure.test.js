@@ -24,7 +24,7 @@ const active = proxyquire('../lib/active', {
 		}
 	}
 });
-const health = proxyquire('../lib/health', { active });
+const health = proxyquire('../lib/health', { './active': active });
 
 describe('#active in a total failure mode', () => {
 
