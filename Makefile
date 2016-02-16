@@ -2,10 +2,9 @@ include n.Makefile
 
 .PHONY: test coverage
 
-clean:
-	git clean -fxd
+test: verify unit-test
 
-test: verify
+unit-tes:
 	$(NPM_BIN_ENV); istanbul cover ./node_modules/.bin/_mocha
 
 coverage:

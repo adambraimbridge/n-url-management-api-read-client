@@ -10,7 +10,7 @@ const active = proxyquire('../lib/active', {
 			table: 'urlmgmtapi_master',
 			instance: {
 				getItem: (opts, cb) => {
-					setTimeout(() => cb(new Error("master failure")), 150)
+					setTimeout(() => cb(new Error('master failure')), 150)
 				}
 			}
 		},
@@ -18,7 +18,7 @@ const active = proxyquire('../lib/active', {
 			table: 'urlmgmtapi_slave',
 			instance: {
 				getItem: (opts, cb) => {
-					setTimeout(() => cb(new Error("slave failure")), 100)
+					setTimeout(() => cb(new Error('slave failure')), 100)
 				}
 			}
 		}
