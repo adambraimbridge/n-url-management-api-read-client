@@ -4,7 +4,7 @@ include n.Makefile
 
 test: verify unit-test
 
-unit-tes:
+unit-test:
 	$(NPM_BIN_ENV); istanbul cover ./node_modules/.bin/_mocha
 
 coverage:
