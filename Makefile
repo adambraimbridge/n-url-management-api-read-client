@@ -1,16 +1,11 @@
+include n.Makefile
+
 .PHONY: test coverage
 
-clean:
-	git clean -fxd
+test: verify unit-test
 
-install: node_modules
-
-node_modules:
-	npm install
-
-test:
-	eslint .
-	istanbul cover ./node_modules/.bin/_mocha
+unit-test:
+	$(NPM_BIN_ENV); istanbul cover ./node_modules/.bin/_mocha
 
 coverage:
 	open coverage/lcov-report/index.html
