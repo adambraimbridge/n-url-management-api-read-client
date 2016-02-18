@@ -11,7 +11,7 @@ const active = proxyquire('../lib/active', {
 			table: 'urlmgmtapi_master',
 			instance: {
 				getItem: (opts, cb) => {
-					setTimeout(() => cb(new Error("master failure")), 100)
+					setTimeout(() => cb(new Error('master failure')), 100)
 				}
 			}
 		},
