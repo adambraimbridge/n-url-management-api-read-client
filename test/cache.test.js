@@ -18,7 +18,6 @@ describe('Caching', function(){
 		}
 
 		before(function(){
-			process.env.USE_CACHE = "SINGLE_INSTANCE";
 			mockery.registerMock('node-cache', NodeCacheMock);
 			mockery.enable({warnOnUnregistered:false, useCleanCache:true});
 			cache = require('../lib/cache');
@@ -40,7 +39,6 @@ describe('Caching', function(){
 			mockery.deregisterAll();
 			mockery.resetCache();
 			mockery.disable();
-			process.env.USE_CACHE = null;
 		});
 
 		it('Should setup the cache with a 30sec TTL', function(){

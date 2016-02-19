@@ -7,11 +7,12 @@ const health = require('./lib/health');
 const cache = require('./lib/cache');
 
 let metrics;
+let useCache = false;
 
 exports.health = health.check;
 
 exports.get = fromURL => {
-	if(process.env.USE_CACHE){
+	if(useCache){
 		let cacheItem = cache.retrieve(fromURL);
 		if(cacheItem){
 			return Promise.resolve(cacheItem);
@@ -25,13 +26,14 @@ exports.get = fromURL => {
 		fromURL,
 		metrics
 	}).then(result => {
-		process.env.USE_CACHE && cache.store(fromURL, result);
+		useCache && cache.store(fromURL, result);
 		return result;
 	});
 };
 
 exports.init = opts => {
 	metrics = opts.metrics;
+	useCache = opts.useCache || false;
 	cache.init({ metrics });
 	active.init({ metrics });
 };
