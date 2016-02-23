@@ -6,13 +6,16 @@
     "aws-sdk": "^2.2.33",
     "denodeify": "^1.2.1",
     "ft-next-logger": "^4.2.3",
-    "lintspaces-cli": "^0.1.1"
+    "lintspaces-cli": "^0.1.1",
+    "node-cache": "^3.1.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^1.10.3",
     "istanbul": "^0.4.2",
     "mocha": "^2.4.5",
-    "proxyquire": "^1.7.4"
+    "mockery": "^1.4.0",
+    "proxyquire": "^1.7.4",
+    "sinon": "^1.17.3"
   }
 }

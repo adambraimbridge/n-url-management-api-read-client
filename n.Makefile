@@ -13,6 +13,7 @@
 
 # clean
 clea%:
+# HACK: Can't use -e option here because it's not supported by our Jenkins
 	@git clean -fxd
 	@$(DONE)
 
@@ -41,14 +42,14 @@ node_modules:
 
 # Regular bower install
 bower_components:
-	@if [ -e bower.json ]; then bower install --config.registry.search=http://registry.origami.ft.com --config.registry.search=https://bower.herokuapp.com && $(DONE); fi
+	@if [ -e bower.json ]; then $(NPM_BIN_ENV) && bower install --config.registry.search=http://registry.origami.ft.com --config.registry.search=https://bower.herokuapp.com && $(DONE); fi
 
 # node_modules for Lambda functions
 functions/%/node_modules:
 	@cd $(dir $@) && if [ -e package.json ]; then $(NPM_INSTALL) && $(DONE); fi
 
 _install_scss_lint:
-	if [ ! -x "$(shell which scss-lint)" ] && [ "$(shell $(call GLOB,'*.scss'))" != "" ]; then gem install scss-lint -v 0.35.0 && $(DONE); fi
+	@if [ ! -x "$(shell which scss-lint)" ] && [ "$(shell $(call GLOB,'*.scss'))" != "" ]; then gem install scss-lint -v 0.35.0 && $(DONE); fi
 
 # Manage the .editorconfig, .eslintrc.json and .scss-lint files if they're in the .gitignore
 .editorconfig .eslintrc.json .scss-lint.yml:
@@ -66,7 +67,8 @@ _verify_lintspaces:
 	@if [ -e .editorconfig ] && [ -e package.json ]; then $(NPM_BIN_ENV) && $(call GLOB) | xargs lintspaces -e .editorconfig -i js-comments,html-comments && $(DONE); fi
 
 _verify_scss_lint:
-	@if [ -e .scss-lint.yml ]; then $(call GLOB,'*.scss') | xargs scss-lint -c ./.scss-lint.yml && $(DONE); fi
+# HACK: Use backticks rather than xargs because xargs swallow exit codes (everything becomes 1 and stoopidly scss-lint exits with 1 if warnings, 2 if errors)
+	@if [ -e .scss-lint.yml ]; then { scss-lint -c ./.scss-lint.yml `$(call GLOB,'*.scss')`; if [ $$? -ne 0 -a $$? -ne 1 ]; then exit 1; fi; $(DONE); } fi
 
 # DEPLOY SUB-TASKS
 
@@ -78,7 +80,7 @@ GLOB = git ls-files $1
 NPM_INSTALL = npm prune --production && npm install
 JSON_GET_VALUE = grep $1 | head -n 1 | sed 's/[," ]//g' | cut -d : -f 2
 IS_GIT_IGNORED = grep -q $(if $1, $1, $@) .gitignore
-VERSION = v0.0.46
+VERSION = v0.0.52
 APP_NAME = $(shell cat package.json 2>/dev/null | $(call JSON_GET_VALUE,name))
 DONE = echo ✓ $@ done
 NPM_BIN_ENV = export PATH="$$PATH:node_modules/.bin"
