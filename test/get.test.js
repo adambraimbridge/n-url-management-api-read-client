@@ -24,10 +24,9 @@ const main = proxyquire('..', {
 	}
 });
 
-
 describe('#get', () => {
 
-	before(() => main.init({ metrics: metricsMock }));
+	before(() => main.init({ metrics: metricsMock, timeout: 500 }));
 
 	it('should #get /fastft', () => {
 		return main.get('www.ft.com/fastft')
@@ -52,7 +51,7 @@ describe('#get', () => {
 	});
 
 	it('should reject if the vanity service takes too long', () => {
-		return main.get('www.ft.com/slow', { timeout: 500 })
+		return main.get('www.ft.com/slow')
 			.then(data => {
 				throw new Error('getting a slow vanity should not resolve');
 			}, error => {
