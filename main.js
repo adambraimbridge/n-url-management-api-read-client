@@ -5,7 +5,6 @@ const get = require('./lib/get');
 const dynamos = require('./lib/dynamos');
 const health = require('./lib/health');
 const cache = require('./lib/cache');
-const timeoutPromise = require('./lib/timeout');
 
 let metrics;
 let useCache = false;
@@ -22,17 +21,16 @@ exports.get = fromURL => {
 	}
 
 	const dynamo = dynamos[active()];
-	return timeoutPromise(() => {
-		return get({
-			dynamo: dynamo.instance,
-			table: dynamo.table,
-			fromURL,
-			metrics
-		}).then(result => {
-			useCache && cache.store(fromURL, result);
-			return result;
-		});
-	}, timeout);
+	return get({
+		dynamo: dynamo.instance,
+		table: dynamo.table,
+		fromURL,
+		metrics,
+		timeout
+	}).then(result => {
+		useCache && cache.store(fromURL, result);
+		return result;
+	});
 };
 
 exports.init = opts => {

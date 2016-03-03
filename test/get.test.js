@@ -50,9 +50,9 @@ describe('#get', () => {
 			});
 	});
 
-	it('should reject if the vanity service takes too long', () => {
+	it.only('should reject if the vanity service takes too long', () => {
 		return main.get('www.ft.com/slow')
-			.then(data => {
+			.then(() => {
 				throw new Error('getting a slow vanity should not resolve');
 			}, error => {
 				expect(error.toString()).to.contain('timed out')
