@@ -9,7 +9,7 @@ const mockInstance = {
 	getItem: (opts, cb) => {
 		if (opts.Key.FromURL.S === 'www.ft.com/fastft') {
 			setTimeout(() => cb(null, itemFixture))
-		} else if (opts.Key.FromURL.S === 'www.ft.com/slow') {
+		} else if (opts.Key.FromURL.S === 'www.ft.com/slowft') {
 			setTimeout(() => cb(null, itemFixture), 1000)
 		} else {
 			setTimeout(() => cb(null, {}));
@@ -51,7 +51,7 @@ describe('#get', () => {
 	});
 
 	it('should reject if the vanity service takes too long', () => {
-		return main.get('www.ft.com/slow')
+		return main.get('www.ft.com/slowft')
 			.then(() => {
 				throw new Error('getting a slow vanity should not resolve');
 			}, error => {
