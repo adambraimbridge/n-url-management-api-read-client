@@ -7,7 +7,11 @@ const metricsMock = require('./utils/metrics-mock');
 
 const mockInstance = {
 	getItem: (opts, cb) => {
-		setTimeout(() => cb(null, itemFixture))
+		if (opts.Key.FromURL.S === 'www.ft.com/fastft') {
+			setTimeout(() => cb(null, itemFixture))
+		} else {
+			setTimeout(() => cb(null, {}));
+		}
 	}
 };
 
@@ -30,6 +34,17 @@ describe('#get', () => {
 					code: 100,
 					fromURL: 'www.ft.com/fastft',
 					toURL: 'www.ft.com/stream/brandId/NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz'
+				});
+			});
+	});
+
+	it('should return a vanity-like response if the database doesn\'t contain a url', () => {
+		return main.get('www.ft.com/unknown')
+			.then(data => {
+				expect(data).to.eql({
+					code: 100,
+					fromURL: 'www.ft.com/unknown',
+					toURL: 'www.ft.com/unknown'
 				});
 			});
 	});
