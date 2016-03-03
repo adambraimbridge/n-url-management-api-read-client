@@ -50,7 +50,7 @@ describe('#get', () => {
 			});
 	});
 
-	it.only('should reject if the vanity service takes too long', () => {
+	it('should reject if the vanity service takes too long', () => {
 		return main.get('www.ft.com/slow')
 			.then(() => {
 				throw new Error('getting a slow vanity should not resolve');
