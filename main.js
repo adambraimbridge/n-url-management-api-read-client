@@ -8,6 +8,7 @@ const cache = require('./lib/cache');
 
 let metrics;
 let useCache = false;
+let timeout;
 
 exports.health = health.check;
 
@@ -24,7 +25,8 @@ exports.get = fromURL => {
 		dynamo: dynamo.instance,
 		table: dynamo.table,
 		fromURL,
-		metrics
+		metrics,
+		timeout
 	}).then(result => {
 		useCache && cache.store(fromURL, result);
 		return result;
@@ -34,6 +36,7 @@ exports.get = fromURL => {
 exports.init = opts => {
 	metrics = opts.metrics;
 	useCache = opts.useCache || false;
+	timeout = opts.timeout;
 	cache.init({ metrics });
 	active.init({ metrics });
 };
