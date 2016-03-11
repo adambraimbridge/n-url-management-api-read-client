@@ -59,4 +59,15 @@ describe('#get', () => {
 			});
 	});
 
+	it('should know that next dot will be www dot quite soon', () => {
+		return main.get('next.ft.com/fastft')
+			.then(data => {
+				expect(data).to.eql({
+					code: 100,
+					fromURL: 'www.ft.com/fastft',
+					toURL: 'www.ft.com/stream/brandId/NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz'
+				});
+			});
+	});
+
 });
