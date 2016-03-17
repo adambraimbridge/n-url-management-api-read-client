@@ -27,6 +27,17 @@ exports.get = fromURL => {
 		fromURL,
 		metrics,
 		timeout
+	}).catch(err => {
+		if (err.message === 'URL_NOT_FOUND') {
+			// NB. This will still get cached by the next then because
+			// now this promise is not rejected anymore.
+			return {
+				fromURL,
+				toURL: fromURL,
+				code: 100
+			};
+		}
+		return Promise.reject(err);
 	}).then(result => {
 		useCache && cache.store(fromURL, result);
 		return result;
