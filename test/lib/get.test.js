@@ -1,8 +1,6 @@
 'use strict';
 
-const proxyquire = require('proxyquire');
 const expect = require('chai').expect;
-const itemFixture = require('../fixtures/fastft.json');
 const metricsMock = require('../utils/metrics-mock');
 
 const mockInstance = {
