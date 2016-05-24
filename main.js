@@ -13,11 +13,13 @@ let timeout;
 exports.health = health.check;
 
 exports.get = fromURL => {
-	if(useCache){
-		let cacheItem = cache.retrieve(fromURL);
-		if(cacheItem){
-			return Promise.resolve(cacheItem);
-		}
+	if (fromURL[fromURL.length - 1] === '/') {
+		const trimmedURL = fromURL.replace(/\/+$/, '');
+		return {
+			fromURL,
+			toURL: trimmedURL,
+			code: 301
+		};
 	}
 
 	const dynamo = dynamos[active()];
