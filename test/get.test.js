@@ -58,4 +58,15 @@ describe('#get', () => {
 				expect(error.toString()).to.contain('timed out')
 			});
 	});
+
+	it('should redirect urls with trailing slashes to the slash-less url', () => {
+		return main.get('https://www.ft.com/fastft/')
+			.then(data => {
+				expect(data).to.eql({
+					code: 301,
+					fromURL: 'https://www.ft.com/fastft/',
+					toURL: 'https://www.ft.com/fastft'
+				});
+			});
+	});
 });
