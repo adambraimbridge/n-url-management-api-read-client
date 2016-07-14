@@ -1,8 +1,0 @@
-{
-  "ecmaFeatures": {
-    "arrowFunctions": true,
-    "blockBindings": true,
-    "objectLiteralShorthandProperties": true,
-    "templateStrings": true
-  }
-}
