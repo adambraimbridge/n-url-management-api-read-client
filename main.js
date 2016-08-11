@@ -34,16 +34,15 @@ exports.get = fromURL => {
 };
 
 exports.batchGet = fromURLs => {
-	// TODO: This should probably be more generic and actually parse the URL to extract the path to
-	//check that it isn't just `/` rather than being specifically for FT.com
-//	if (fromURL !== 'https://www.ft.com/' && fromURL[fromURL.length - 1] === '/') {
-//		const trimmedURL = fromURL.replace(/\/+$/, '');
-//		return Promise.resolve({
-//			fromURL,
-//			toURL: trimmedURL,
-//			code: 301
-//		});
-//	}
+
+	// Normal gets synthesise redirects from, say, https//www.ft.com/blah/ to https://www.ft.com/blah.
+	// It's a bit fiddly to do this in batch mode and not yet needed so haven't opted to not support this
+	// use case just yet.  TODO, later on, if needed…
+	fromURLs.forEach(fromURL => {
+		if (fromURL !== 'https://www.ft.com/' && fromURL[fromURL.length - 1] === '/') {
+			throw new Error(`event=BAD_FROM_URL fromURL=${fromURL} message="Trailing slash redirection to trimmed URLs not supported by ‘batchGet’`);
+		}
+	});
 
 	const dynamo = dynamos[active()];
 	return batchGet({
