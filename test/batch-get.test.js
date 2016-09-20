@@ -71,7 +71,6 @@ describe('#batchGet', () => {
 			.then(() => {
 				throw new Error('should have thrown');
 			}, err => {
-	console.log(err);
 				expect(err.toString()).to.contain('Trailing slash redirection to trimmed URLs not supported');
 			});
 	});
