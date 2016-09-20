@@ -4,9 +4,11 @@ const proxyquire = require('proxyquire');
 const expect = require('chai').expect;
 const itemFixture = require('./fixtures/fastft.json');
 const metricsMock = require('./utils/metrics-mock');
+let called = false;
 
 const mockInstance = {
 	getItem: (opts, cb) => {
+		called = true;
 		if (opts.Key.FromURL.S === 'https://www.ft.com/fastft') {
 			setTimeout(() => cb(null, itemFixture))
 		} else if (opts.Key.FromURL.S === 'https://www.ft.com/slowft') {
@@ -27,6 +29,7 @@ const main = proxyquire('..', {
 describe('#get', () => {
 
 	before(() => main.init({ metrics: metricsMock, timeout: 500 }));
+	afterEach(() => called = false)
 
 	it('should #get /fastft', () => {
 		return main.get('https://www.ft.com/fastft')
@@ -73,6 +76,18 @@ describe('#get', () => {
 	it('shouldn\'t redirect urls with trailing slashes to the slash-less url if that URL is only a /', () => {
 		return main.get('https://www.ft.com/')
 			.then(data => {
+				expect(data).to.eql({
+					code: 100,
+					fromURL: 'https://www.ft.com/',
+					toURL: 'https://www.ft.com/'
+				});
+			});
+	});
+
+	it('should return a trivial 100 response without contacting dynamodb if url is domain root', () => {
+		return main.get('https://www.ft.com/')
+			.then(data => {
+				expect(called).to.be.false;
 				expect(data).to.eql({
 					code: 100,
 					fromURL: 'https://www.ft.com/',
