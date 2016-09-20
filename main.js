@@ -21,6 +21,12 @@ exports.get = fromURL => {
 			toURL: trimmedURL,
 			code: 301
 		});
+	} else if (fromURL === 'https://www.ft.com/') {
+		return Promise.resolve({
+			fromURL,
+			toURL: fromURL,
+			code: 100
+		});
 	}
 
 	const dynamo = dynamos[active()];
