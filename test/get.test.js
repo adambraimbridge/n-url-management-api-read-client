@@ -3,6 +3,7 @@
 const proxyquire = require('proxyquire');
 const expect = require('chai').expect;
 const itemFixture = require('./fixtures/fastft.json');
+const itemFäxture = require('./fixtures/fästft.json');
 const metricsMock = require('./utils/metrics-mock');
 let called = false;
 
@@ -13,6 +14,8 @@ const mockInstance = {
 			setTimeout(() => cb(null, itemFixture))
 		} else if (opts.Key.FromURL.S === 'https://www.ft.com/slowft') {
 			setTimeout(() => cb(null, itemFixture), 1000)
+		} else if (opts.Key.FromURL.S === 'https://www.ft.com/fästft') {
+			setTimeout(() => cb(null, itemFäxture))
 		} else {
 			setTimeout(() => cb(null, {}));
 		}
@@ -69,6 +72,17 @@ describe('#get', () => {
 					code: 301,
 					fromURL: 'https://www.ft.com/fastft/',
 					toURL: 'https://www.ft.com/fastft'
+				});
+			});
+	});
+
+	it('should decode non-ascii characters', () => {
+		return main.get('https://www.ft.com/f%C3%A4stft')
+			.then(data => {
+				expect(data).to.eql({
+					code: 100,
+					fromURL: 'https://www.ft.com/fästft',
+					toURL: 'https://www.ft.com/stream/brandId/NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRzä'
 				});
 			});
 	});
