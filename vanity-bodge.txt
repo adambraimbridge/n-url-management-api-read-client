@@ -1,0 +1,11 @@
+/home	/	redirect
+/home/uk	https://www.ft.com/	redirect
+/home/us	https://www.ft.com/	redirect
+/home/europe	https://www.ft.com/	redirect
+/home/asia	https://www.ft.com/	redirect
+/home/middleeast	https://www.ft.com/	redirect
+/home/india	https://www.ft.com/	redirect
+/home/rw	https://www.ft.com/	redirect
+/home/us	https://www.ft.com/	redirect
+/international	https://www.ft.com/?edition=international	redirect
+/uk	https://www.ft.com/?edition=uk	redirect
