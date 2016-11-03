@@ -18,14 +18,14 @@ exports.get = fromURL => {
 	if (fromURL !== 'https://www.ft.com/' && fromURL[fromURL.length - 1] === '/') {
 		const trimmedURL = fromURL.replace(/\/+$/, '');
 		return Promise.resolve({
-			fromURL,
-			toURL: trimmedURL,
+			fromURL: encodeURI(fromURL),
+			toURL: encodeURI(trimmedURL),
 			code: 301
 		});
 	} else if (fromURL === 'https://www.ft.com/') {
 		return Promise.resolve({
-			fromURL,
-			toURL: fromURL,
+			fromURL: encodeURI(fromURL),
+			toURL: encodeURI(fromURL),
 			code: 100
 		});
 	}

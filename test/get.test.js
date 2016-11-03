@@ -76,17 +76,6 @@ describe('#get', () => {
 			});
 	});
 
-	it('should decode non-ascii characters', () => {
-		return main.get('https://www.ft.com/f%C3%A4stft')
-			.then(data => {
-				expect(data).to.eql({
-					code: 100,
-					fromURL: 'https://www.ft.com/fästft',
-					toURL: 'https://www.ft.com/stream/brandId/NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRzä'
-				});
-			});
-	});
-
 	it('shouldn\'t redirect urls with trailing slashes to the slash-less url if that URL is only a /', () => {
 		return main.get('https://www.ft.com/')
 			.then(data => {
