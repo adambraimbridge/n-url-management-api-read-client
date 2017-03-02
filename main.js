@@ -12,7 +12,12 @@ let timeout;
 exports.health = health.check;
 
 exports.get = fromURL => {
-	fromURL = decodeURI(fromURL);
+	try {
+		fromURL = decodeURI(fromURL);
+	} catch(err) {
+		return Promise.reject(err);
+	}
+
 	// TODO: This should probably be more generic and actually parse the URL to extract the path to
 	//check that it isn't just `/` rather than being specifically for FT.com
 	if (fromURL !== 'https://www.ft.com/' && fromURL[fromURL.length - 1] === '/') {
