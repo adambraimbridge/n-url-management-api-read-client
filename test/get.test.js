@@ -98,4 +98,13 @@ describe('#get', () => {
 				});
 			});
 	});
+
+	it('should reject if url is malformed', () => {
+		return main.get('https://www.ft.com/%2050%')
+		.then(() => {
+			throw new Error('malformed URL should not resolve');
+		}, error => {
+			expect(error).to.be.an.instanceof(URIError);
+		});
+	});
 });
