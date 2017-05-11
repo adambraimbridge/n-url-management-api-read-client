@@ -27,3 +27,8 @@ You will need the following IAM permissions:-
 Expects:-
 - `URLMGMTAPI_AWS_ACCESS_KEY`
 - `URLMGMTAPI_AWS_SECRET_KEY`
+
+## init options
+- timeout [Number]
+- connectTimeout [Number]
+- poolConnextions [Boolean]
