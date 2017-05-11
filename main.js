@@ -35,7 +35,7 @@ exports.get = fromURL => {
 		});
 	}
 
-	const dynamo = dynamos[active()];
+	const dynamo = dynamos.get([active()]);
 	return get({
 		dynamo: dynamo.instance,
 		table: dynamo.table,
