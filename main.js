@@ -77,5 +77,5 @@ exports.batchGet = fromURLs => {
 exports.init = opts => {
 	metrics = opts.metrics;
 	timeout = opts.timeout;
-	active.init({ metrics });
+	active.init(opts);
 };

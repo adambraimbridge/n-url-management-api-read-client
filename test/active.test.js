@@ -4,9 +4,15 @@ const proxyquire = require('proxyquire');
 const expect = require('chai').expect;
 const itemFixture = require('./fixtures/fastft.json');
 const metricsMock = require('./utils/metrics-mock');
+const sinon = require('sinon')
+const dynamosInitStub = sinon.stub();
 
 const active = proxyquire('../lib/active', {
 	'./dynamos': {
+		init: dynamosInitStub,
+		get: function (name) {
+			return this[name];
+		},
 		master: {
 			table: 'urlmgmtapi_master',
 			instance: {
@@ -27,8 +33,12 @@ const active = proxyquire('../lib/active', {
 });
 
 describe('#active', () => {
+	const opts = { metrics: metricsMock }
+	before(() => active.init(opts));
 
-	before(() => active.init({ metrics: metricsMock }));
+	it('should pass options to dynamos', () => {
+		expect(dynamosInitStub.calledWith(opts)).to.be.true
+	})
 
 	it('should start off being ‘master’', () => {
 		expect(active()).to.eql('master');
@@ -41,5 +51,7 @@ describe('#active', () => {
 			done();
 		}, 500);
 	});
+
+
 
 });
