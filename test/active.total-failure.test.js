@@ -6,6 +6,10 @@ const metricsMock = require('./utils/metrics-mock');
 
 const active = proxyquire('../lib/active', {
 	'./dynamos': {
+		init: () => null,
+		get: function (name) {
+			return this[name];
+		},
 		master: {
 			table: 'urlmgmtapi_master',
 			instance: {

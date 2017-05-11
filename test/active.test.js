@@ -4,9 +4,14 @@ const proxyquire = require('proxyquire');
 const expect = require('chai').expect;
 const itemFixture = require('./fixtures/fastft.json');
 const metricsMock = require('./utils/metrics-mock');
+const sinon = require('sinon')
 
 const active = proxyquire('../lib/active', {
 	'./dynamos': {
+		init: sinon.stub(),
+		get: function (name) {
+			return this[name];
+		},
 		master: {
 			table: 'urlmgmtapi_master',
 			instance: {

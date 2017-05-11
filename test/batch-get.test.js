@@ -21,6 +21,10 @@ const mockInstance = {
 
 const main = proxyquire('..', {
 	'./lib/dynamos': {
+		init: () => null,
+		get: function (name) {
+			return this[name];
+		},
 		master: { table: 'urlmgmtapi_master', instance: mockInstance },
 		slave: { table: 'urlmgmtapi_slave', instance: mockInstance }
 	}
