@@ -5,6 +5,8 @@ include n.Makefile
 test: verify unit-test
 
 unit-test:
+	export URLMGMTAPI_AWS_ACCESS_KEY=URLMGMTAPI_AWS_ACCESS; \
+	export URLMGMTAPI_AWS_SECRET_KEY=URLMGMTAPI_AWS_SECRET; \
 	mocha
 
 coverage:
