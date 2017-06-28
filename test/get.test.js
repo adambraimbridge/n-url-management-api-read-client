@@ -3,7 +3,7 @@
 const proxyquire = require('proxyquire');
 const expect = require('chai').expect;
 const itemFixture = require('./fixtures/fastft.json');
-const itemFäxture = require('./fixtures/fästft.json');
+const encodedUrlFixture = require('./fixtures/encodedUrl.json');
 const metricsMock = require('./utils/metrics-mock');
 let called = false;
 
@@ -15,7 +15,7 @@ const mockInstance = {
 		} else if (opts.Key.FromURL.S === 'https://www.ft.com/slowft') {
 			setTimeout(() => cb(null, itemFixture), 1000)
 		} else if (opts.Key.FromURL.S === 'https://www.ft.com/fästft') {
-			setTimeout(() => cb(null, itemFäxture))
+			setTimeout(() => cb(null, encodedUrlFixture))
 		} else {
 			setTimeout(() => cb(null, {}));
 		}

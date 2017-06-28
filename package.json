@@ -9,6 +9,7 @@
     "lintspaces-cli": "^0.1.1"
   },
   "devDependencies": {
+    "@financial-times/n-gage": "^1.8.9",
     "chai": "^3.5.0",
     "eslint": "^1.10.3",
     "istanbul": "^0.4.2",
@@ -17,5 +18,9 @@
     "npm-prepublish": "^1.2.1",
     "proxyquire": "^1.7.4",
     "sinon": "^1.17.3"
+  },
+  "scripts": {
+    "precommit": "node_modules/.bin/secret-squirrel",
+    "prepush": "make verify -j3"
   }
 }
