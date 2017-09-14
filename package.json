@@ -5,8 +5,7 @@
   "dependencies": {
     "aws-sdk": "^2.2.33",
     "denodeify": "^1.2.1",
-    "ft-next-logger": "^4.2.3",
-    "lintspaces-cli": "^0.1.1"
+    "ft-next-logger": "^4.2.3"
   },
   "devDependencies": {
     "@financial-times/n-gage": "^1.8.9",
@@ -17,10 +16,12 @@
     "mockery": "^1.4.0",
     "npm-prepublish": "^1.2.1",
     "proxyquire": "^1.7.4",
-    "sinon": "^1.17.3"
+    "sinon": "^1.17.3",
+    "lintspaces-cli": "^0.6.0"
   },
   "scripts": {
     "precommit": "node_modules/.bin/secret-squirrel",
-    "prepush": "make verify -j3"
+    "prepush": "make verify -j3",
+    "commitmsg": "node_modules/.bin/secret-squirrel-commitmsg"
   }
 }
