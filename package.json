@@ -5,13 +5,13 @@
   "dependencies": {
     "aws-sdk": "^2.2.33",
     "denodeify": "^1.2.1",
-    "ft-next-logger": "^4.2.3",
-    "lintspaces-cli": "^0.1.1"
+    "ft-next-logger": "^4.2.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^1.10.3",
     "istanbul": "^0.4.2",
+    "lintspaces-cli": "^0.1.1",
     "mocha": "^2.4.5",
     "mockery": "^1.4.0",
     "npm-prepublish": "^1.2.1",
