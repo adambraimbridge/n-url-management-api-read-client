@@ -1,7 +1,7 @@
 {
-	"Item": {
-		"FromURL": { "S": "https://www.ft.com/justasfastft" },
-		"Code": { "N": "100" },
-		"ToURL": { "S": "https://www.ft.com/stream/brandId/NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz" }
-	}
+  "Item": {
+    "FromURL": { "S": "https://www.ft.com/justasfastft" },
+    "Code": { "N": "100" },
+    "ToURL": { "S": "https://www.ft.com/stream/brandId/NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz" }
+  }
 }
