@@ -32,3 +32,4 @@ Expects:-
 - timeout [Number]
 - connectTimeout [Number]
 - poolConnextions [Boolean]
+- raceOnce [Boolean] = don't keep checking up on the health of the dynamodbs. Use for a lambda environment
