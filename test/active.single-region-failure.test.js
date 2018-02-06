@@ -15,7 +15,7 @@ const active = proxyquire('../lib/active', {
 			table: 'urlmgmtapi_master',
 			instance: {
 				getItem: (opts, cb) => {
-					setTimeout(() => cb(new Error('master failure')), 100)
+					setTimeout(() => cb(new Error('master failure')), 100);
 				}
 			}
 		},
@@ -23,7 +23,7 @@ const active = proxyquire('../lib/active', {
 			table: 'urlmgmtapi_slave',
 			instance: {
 				getItem: (opts, cb) => {
-					setTimeout(() => cb(null, itemFixture), 300)
+					setTimeout(() => cb(null, itemFixture), 300);
 				}
 			}
 		}
@@ -45,5 +45,4 @@ describe('#active in a single region failure mode', () => {
 			done();
 		}, 500);
 	});
-
 });
