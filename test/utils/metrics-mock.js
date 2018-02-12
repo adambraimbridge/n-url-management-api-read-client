@@ -1,6 +1,6 @@
 'use strict';
 
-const logger = require('ft-next-logger').logger;
+const logger = require('@financial-times/n-logger').default;
 
 exports.count = metric => {
 	logger.info({ event: 'METRICS_COUNT', metric });
