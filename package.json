@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "main": "main",
   "dependencies": {
+    "@financial-times/n-logger": "^5.6.1",
     "aws-sdk": "^2.2.33",
-    "denodeify": "^1.2.1",
-    "ft-next-logger": "^4.2.3"
+    "denodeify": "^1.2.1"
   },
   "devDependencies": {
     "@financial-times/n-gage": "^1.8.9",
