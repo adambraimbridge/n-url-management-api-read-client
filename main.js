@@ -62,7 +62,7 @@ exports.batchGet = fromURLs => {
 				}
 			});
 
-			const dynamo = dynamos[active()];
+			const dynamo = dynamos.get([active()]);
 			return batchGet({
 				dynamo: dynamo.instance,
 				table: dynamo.table,
