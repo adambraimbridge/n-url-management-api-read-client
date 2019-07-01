@@ -12,16 +12,18 @@
     "chai": "^3.5.0",
     "eslint": "^1.10.3",
     "istanbul": "^0.4.2",
+    "lintspaces-cli": "^0.6.0",
     "mocha": "^5.0.0",
     "mockery": "^1.4.0",
     "npm-prepublish": "^1.2.1",
     "proxyquire": "^1.7.4",
     "sinon": "^1.17.3",
-    "lintspaces-cli": "^0.6.0"
+    "snyk": "^1.168.0"
   },
   "scripts": {
     "precommit": "node_modules/.bin/secret-squirrel",
     "prepush": "make verify -j3",
-    "commitmsg": "node_modules/.bin/secret-squirrel-commitmsg"
+    "commitmsg": "node_modules/.bin/secret-squirrel-commitmsg",
+    "prepare": "npx snyk protect || npx snyk protect -d || true"
   }
 }
